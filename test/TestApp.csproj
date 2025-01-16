@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+    <OutputType>Exe</OutputType>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationId>com.company.appname</ApplicationId>
+    <ApplicationVersion>1</ApplicationVersion>
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="google-services.json" />
+    <None Remove="Resources\layout\content_main.xml" />
+    <None Remove="Resources\menu\menu_main.xml" />
+    <None Remove="Resources\values\colors.xml" />
+    <None Remove="Resources\values\dimens.xml" />
+    <None Remove="Resources\values\styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <GoogleServicesJson Include="google-services.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </GoogleServicesJson>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Companova.Common.Extensions" Version="1.0.1" />
+    <PackageReference Include="Xamarin.Google.Android.Material" Version="1.12.0.1" />
+    <PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.100" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\src\CommonAndroidServices.csproj" />
+  </ItemGroup>
+</Project>
