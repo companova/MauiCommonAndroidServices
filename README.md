@@ -8,7 +8,7 @@ Maui implementation of Common Android Services:
 
 master | dev
 ------------ | -------------
-[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.XamarinCommonAndroidServices?branchName=main)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=3&branchName=main)|[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.XamarinCommonAndroidServices?branchName=dev)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=3&branchName=dev)
+[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.MauiCommonAndroidServices?branchName=main)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=3&branchName=main)|[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.MauiCommonAndroidServices?branchName=dev)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=3&branchName=dev)
 
 ### Setup:
 <a href="https://www.nuget.org/packages/Companova.Maui.Common.Android.Services/">
