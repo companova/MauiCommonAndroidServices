@@ -404,4 +404,4 @@ FodyWeavers.xsd
 
 # google-services.json and manifest
 google-services - Alpha.json
-/test/Properties/AndroidManifest - Alpha.xml
+AndroidManifest - Alpha.xml

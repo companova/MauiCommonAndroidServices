@@ -1,0 +1,94 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <!--Work around so the conditions work below-->
+    <TargetFrameworks></TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net8.0-android</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net8.0-android</TargetFrameworks>
+    <!--Feel free to add as many targets as you need below
+    netstandard1.0;netstandard2.0;MonoAndroid90;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
+    For UWP update the version number with a version number you have installed.
+    -->
+    <AssemblyName>Companova.Maui.Common.Android.Services</AssemblyName>
+    <RootNamespace>Companova.Maui.Common.Android.Services</RootNamespace>
+    <PackageId>Companova.Maui.Common.Android.Services</PackageId>
+    
+    <Product>$(AssemblyName) ($(TargetFramework))</Product>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+    <Version>0.0.1-preview</Version>
+    <PackageVersion>0.0.1-preview</PackageVersion>
+    <PackOnBuild>true</PackOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>default</LangVersion>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <LangVersion>latest</LangVersion>
+    <DebugType>portable</DebugType>
+    
+    <!--TODO: Fill these in-->
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/companova/MauiCommonAndroidServices/</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/companova/MauiCommonAndroidServices/</RepositoryUrl>
+    <PackageReleaseNotes>Upgraded to Android SDK 13, Android Billing Library to 6.2.1, Firebase Analytics to 122.1.2.1 and GooglePlayServices Ads to 123.6.0</PackageReleaseNotes>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <!--<PackageIconUrl>ICON URL</PackageIconUrl>-->
+    <PackageTags>android, maui, plugin, billing client, in-app purchase, firebase, analytics, admob, interstitial ads, Companova, Common.Android.Services</PackageTags>
+    
+    <Title>Companova.Maui.Common.Android.Services</Title>
+    <Summary>Maui implementation of Common Android Services</Summary>
+    <Description>
+      Maui implementation for Common Android Services.
+
+      - Interstitial Ads version 123.6.0
+      - Firebase Analytics version 122.1.2.1
+      - In-App-Purchases supporting Billing library 6.2.1
+    </Description>
+
+    
+    <Owners>Dima Maltsev</Owners>
+    <Authors>Dima Maltsev</Authors>
+    <Company>CompaNova LLC</Company>
+    <Copyright>Copyright 2025</Copyright>
+
+    <!--When built in 2019 will remove extra references on pack-->
+    <DisableExtraReferences>true</DisableExtraReferences>
+    
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.shared.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.Contains('-android')) ">
+    <Compile Include="**\*.android.cs" />
+    <PackageReference Include="Xamarin.Firebase.Analytics" Version="122.1.2.1" />
+    <PackageReference Include="Xamarin.Android.Google.BillingClient" Version="6.2.1" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Ads" Version="123.6.0" /> 
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+    <None Include="..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+</Project>
