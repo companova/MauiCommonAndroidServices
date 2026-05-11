@@ -3,8 +3,8 @@
   <PropertyGroup>
     <!--Work around so the conditions work below-->
     <TargetFrameworks></TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net8.0-android</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net8.0-android</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net10.0-android</TargetFrameworks>
     <!--Feel free to add as many targets as you need below
     netstandard1.0;netstandard2.0;MonoAndroid90;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
     For UWP update the version number with a version number you have installed.
@@ -14,10 +14,10 @@
     <PackageId>Companova.Maui.Common.Android.Services</PackageId>
     
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-    <Version>0.0.1-preview</Version>
-    <PackageVersion>0.0.1-preview</PackageVersion>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.1.0</AssemblyFileVersion>
+    <Version>0.0.2-preview</Version>
+    <PackageVersion>0.0.2-preview</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -78,9 +78,10 @@
 
   <ItemGroup Condition=" $(TargetFramework.Contains('-android')) ">
     <Compile Include="**\*.android.cs" />
-    <PackageReference Include="Xamarin.Firebase.Analytics" Version="122.1.2.1" />
-    <PackageReference Include="Xamarin.Android.Google.BillingClient" Version="6.2.1" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Ads" Version="123.6.0" /> 
+    <PackageReference Include="Xamarin.Firebase.Analytics" Version="123.2.0" />
+    <PackageReference Include="Xamarin.Android.Google.BillingClient" Version="8.3.0.2" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Ads" Version="125.2.0" />
+    <PackageReference Include="Xamarin.AndroidX.DataStore.Preferences" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>

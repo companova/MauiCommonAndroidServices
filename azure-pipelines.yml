@@ -24,7 +24,7 @@ steps:
 # https://github.com/actions/runner-images/issues/8828
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '11'
+    versionSpec: '21'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'PreInstalled'
 

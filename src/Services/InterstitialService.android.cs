@@ -2,11 +2,11 @@
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-using Android.Gms.Ads;
-using Android.Gms.Ads.Interstitial;
-
 using Android.App;
 using Android.Runtime;
+
+using Google.Android.Gms.Ads;
+using Google.Android.Gms.Ads.Interstitial;
 
 using Companova.Maui.Common.Android.Helpers;
 

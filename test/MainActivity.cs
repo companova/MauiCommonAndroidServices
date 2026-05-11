@@ -17,6 +17,7 @@ using Companova.Common.Extensions;
 using Companova.Maui.Common.Android.Services;
 
 
+using Google.Android.Gms.Ads;
 
 namespace AndroidApp
 {
@@ -65,7 +66,7 @@ namespace AndroidApp
             SetupControls();
 
             // Initialize the MobileAd (not sure if it is needed)
-            Android.Gms.Ads.MobileAds.Initialize(Android.App.Application.Context);
+            MobileAds.Initialize(Android.App.Application.Context);
 
             // Set UI Timer to initialize Interstitial Ads with some delay
             _uiInitTimer = new System.Timers.Timer();
@@ -253,6 +254,28 @@ namespace AndroidApp
                 if (purchase.State == PurchaseState.Purchased && !purchase.Acknowledged)
                 {
                     await _inAppPurchaseService.FinalizePurchaseAsync(purchase.PurchaseToken, ProductType.NonConsumable);
+
+                    AndroidX.AppCompat.App.AlertDialog.Builder dialog = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
+                    dialog.SetTitle(productId);
+                    dialog.SetMessage("Purchase is successful. Finalizing the Purchase.");
+                    dialog.SetPositiveButton("OK", delegate { });
+                    // Show the alert dialog to the user and wait for response.
+                    dialog.Show();
+                }
+
+                // This scenarios is for Slow Payments (e.g. Bank Account transfers, Cash on Delivery, etc.) where the purchase is not completed immediately and is in pending state. 
+                // In this case, we don't want to grant entitlements until the purchase is completed. 
+                // Google recommends to call QueryPurchasesAsync on startup to check for any pending purchases and grant entitlements when the purchase is completed.
+                // From: https://developer.android.com/google/play/billing/integrate#pending
+                // With the current implementation, the user can click on Restore button to check for pending purchases and grant entitlements when the purchase is completed.
+                if (purchase.State == PurchaseState.PaymentPending)
+                {
+                    AndroidX.AppCompat.App.AlertDialog.Builder dialog = new AndroidX.AppCompat.App.AlertDialog.Builder(this);
+                    dialog.SetTitle(productId);
+                    dialog.SetMessage("Purchase is pending. Please wait. Click Restore to Retry and Finalize the Purchase.");
+                    dialog.SetPositiveButton("OK", delegate { });
+                    // Show the alert dialog to the user and wait for response.
+                    dialog.Show();
                 }
             }
             catch (InAppPurchaseException iapEx)
