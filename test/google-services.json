@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "712440016275",
-    "project_id": "alphabet-match-cn",
-    "storage_bucket": "alphabet-match-cn.appspot.com"
+    "project_number": "00000000000",
+    "project_id": "your-project-id",
+    "storage_bucket": "your-project-id.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:712440016275:android:8d9289d7cf926d9ac44c66",
+        "mobilesdk_app_id": "1:00000000000:android:00000000000000",
         "android_client_info": {
-          "package_name": "com.companova.alphabetmatchplus"
+          "package_name": "com.company.appname"
         }
       },
       "oauth_client": [
         {
-          "client_id": "712440016275-ltm9tl2oluu2t5ddqqfkp8hghjjo3mb2.apps.googleusercontent.com",
+          "client_id": "00000000000-key.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyASyTp2ejO7p1s-KAQ9fAxmGiyerBw46pM"
+          "current_key": "Key"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "712440016275-ltm9tl2oluu2t5ddqqfkp8hghjjo3mb2.apps.googleusercontent.com",
+              "client_id": "00000000000-key.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
