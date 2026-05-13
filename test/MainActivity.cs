@@ -34,6 +34,7 @@ namespace AndroidApp
 
         private IInAppPurchaseService _inAppPurchaseService = null;
 
+#pragma warning disable CA2213 // Disposable fields should be disposed. These are main form fields. No need to dispose them.
         private System.Timers.Timer _uiInitTimer = null;
 
         // Controls:
@@ -41,6 +42,8 @@ namespace AndroidApp
         private Button _btnLogEvent;
         private Button _btnPurchase;
         private Button _btnRestore;
+#pragma warning restore CA2213 // Disposable fields should be disposed
+        
         /// <summary>
         /// Cross Platform Interstitial Ad Service
         /// </summary>
@@ -135,8 +138,11 @@ namespace AndroidApp
             _uiInitTimer.Enabled = false;
             _uiInitTimer.Stop();
 
+            // Initialize Firebase (for Analytics)
+            InitializeFirebase();
+
             // Interstitial Ads
-            _interstitialService.Initialize(true, _interstitialAdUnitId, null);
+            _interstitialService.Initialize(true, _interstitialAdUnitId, CrossAndroidServices.AnalyticsService);
             await _interstitialService.LoadInterstitialAsync();
         }
 
