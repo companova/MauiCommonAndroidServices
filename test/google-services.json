@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:00000000000:android:00000000000000",
         "android_client_info": {
-          "package_name": "com.company.appname"
+          "package_name": "com.yourcompany.appname"
         }
       },
       "oauth_client": [

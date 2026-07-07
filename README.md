@@ -1,14 +1,13 @@
 # MauiCommonAndroidServices
 Maui implementation of Common Android Services:
-- Interstitial Ads version 122.3.0
-- Firebase Analytics version 121.3.0.4
-- In-App-Purchases supporting Billing library 5.2.0
-
+- Interstitial Ads version 125.2.0
+- Firebase Analytics version 123.2.0
+- In-App-Purchases supporting Billing library 8.3.0.2
 ### Build Status:
 
 master | dev
 ------------ | -------------
-[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.MauiCommonAndroidServices?branchName=main)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=3&branchName=main)|[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.MauiCommonAndroidServices?branchName=dev)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=3&branchName=dev)
+[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.MauiCommonAndroidServices?branchName=main)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=5&branchName=main)|[![Build Status](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_apis/build/status/companova.MauiCommonAndroidServices?branchName=dev)](https://dev.azure.com/cn-github-builds/GitHub%20Builds/_build/latest?definitionId=5&branchName=dev)
 
 ### Setup:
 <a href="https://www.nuget.org/packages/Companova.Maui.Common.Android.Services/">

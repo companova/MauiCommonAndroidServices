@@ -144,7 +144,7 @@ namespace Companova.Maui.Common.Android.Services
         private TaskCompletionSource<IList<Purchase>> _purchasesRestored;
 
         // A dictionary of retrieved products
-        private readonly Dictionary<string, SkuDetails> _rertievedProducts = new Dictionary<string, SkuDetails>();
+        private readonly Dictionary<string, ProductDetails> _retrievedProducts = new Dictionary<string, ProductDetails>();
 
         // Log Tag
         private const string _billingTag = "InAppPurchase";
@@ -175,9 +175,10 @@ namespace Companova.Maui.Common.Android.Services
 
             _connected = new TaskCompletionSource<object>();
 
+            PendingPurchasesParams pendingParams = PendingPurchasesParams.NewBuilder().EnableOneTimeProducts().Build();
             _billingClient = BillingClient.NewBuilder(Application.Context)
                 .SetListener(this)
-                .EnablePendingPurchases()
+                .EnablePendingPurchases(pendingParams)
                 .Build();
 
             // Attempt to connect to the service
@@ -235,14 +236,18 @@ namespace Companova.Maui.Common.Android.Services
         {
             string skuType = GetBillingSkuType(productType);
 
+            List<QueryProductDetailsParams.Product> productList = productIds.Select(p => QueryProductDetailsParams.Product.NewBuilder()
+                .SetProductType(skuType)
+                .SetProductId(p)
+                .Build()).ToList();
+
             // Build the Sku Params
-            SkuDetailsParams skuParams = SkuDetailsParams.NewBuilder()
-                .SetSkusList(productIds)
-                .SetType(skuType)
+            QueryProductDetailsParams skuParams = QueryProductDetailsParams.NewBuilder()
+                .SetProductList(productList)
                 .Build();
 
             // Query the Play store
-            QuerySkuDetailsResult queryResult = await _billingClient.QuerySkuDetailsAsync(skuParams);
+            QueryProductDetailsResult queryResult = await _billingClient.QueryProductDetailsAsync(skuParams);
             BillingResult result = queryResult?.Result;
 
             if (result == null)
@@ -259,27 +264,39 @@ namespace Companova.Maui.Common.Android.Services
             }
 
             // Wait till the products are received in the callback
-            IList<SkuDetails> skuDetails = queryResult?.SkuDetails;
+            IList<ProductDetails> skuDetails = queryResult?.ProductDetails;
             if (skuDetails == null)
-                skuDetails = new List<SkuDetails>();
+                skuDetails = new List<ProductDetails>();
 
             // Add more Skus to the Dictionary of SkuDetails
             // We need SkuDetails to initiate the Purchase
-            foreach (SkuDetails sku in skuDetails)
-                _rertievedProducts.TryAdd(sku.Sku, sku);
+            foreach (ProductDetails sku in skuDetails)
+                _retrievedProducts.TryAdd(sku.ProductId, sku);
+
+            // Initialize the list of Products to return. Map the SkuDetails received from the Play Store to our Product class
+            List<Product> listOfProducts = new List<Product>(skuDetails.Count);
+            foreach (ProductDetails product in skuDetails)
+            {
+                // Get One Time Purchase details. This is required to check if the product is free (e.g. promotional) or not,
+                // as well as to get the introductory price details
+
+                // TODO: Support Subscription Offer details when they are available in the Play Store API
+                // OneTimePurchaseDetail will be null for Subscriptions with Offers, but we should be able to get the offer details from SubscriptionOfferDetails
+                ProductDetails.OneTimePurchaseOfferDetails oneTimePurchaseDetail = product.GetOneTimePurchaseOfferDetails();
+
+                listOfProducts.Add(new Product
+                {
+                    Name = product.Title,
+                    Description = product.Description,
+                    CurrencyCode = oneTimePurchaseDetail?.PriceCurrencyCode,
+                    FormattedPrice = oneTimePurchaseDetail?.FormattedPrice,
+                    ProductId = product.ProductId,
+                    MicrosPrice = oneTimePurchaseDetail?.PriceAmountMicros,
+                });
+            }
 
             // Return products
-            return skuDetails.Select(p => new Product
-            {
-                Name = p.Title,
-                Description = p.Description,
-                CurrencyCode = p.PriceCurrencyCode,
-                FormattedPrice = p.Price,
-                ProductId = p.Sku,
-                MicrosPrice = p.PriceAmountMicros,
-                LocalizedIntroductoryPrice = p.IntroductoryPrice,
-                MicrosIntroductoryPrice = p.IntroductoryPriceAmountMicros
-            });
+            return listOfProducts;
         }
 
         /// <summary>
@@ -303,15 +320,19 @@ namespace Companova.Maui.Common.Android.Services
             if (_transactionPurchased != null && !_transactionPurchased.Task.IsCanceled)
                 throw new InAppPurchaseException(PurchaseError.DeveloperError, "Another Purchase is in progress");
 
-            // First, get the SkuDetail
-            SkuDetails sku;
-            if (!_rertievedProducts.TryGetValue(productId, out sku))
+            // First, get the ProductDetails
+            ProductDetails productDetail;
+            if (!_retrievedProducts.TryGetValue(productId, out productDetail))
                 throw new InAppPurchaseException(PurchaseError.DeveloperError,
                     $"Cannot find a retrieved Product with {productId} SKU. Products must be first queried from the Play Store");
 
+            BillingFlowParams.ProductDetailsParams productDetailsParams = BillingFlowParams.ProductDetailsParams.NewBuilder()
+                .SetProductDetails(productDetail)
+                .Build();
+
             // Build FlowParam for the Purchase
             BillingFlowParams flowParams = BillingFlowParams.NewBuilder()
-                    .SetSkuDetails(sku)
+                    .SetProductDetailsParamsList([productDetailsParams])
                     .Build();
 
             // Set a new Task Source to wait for completion
@@ -789,7 +810,7 @@ namespace Companova.Maui.Common.Android.Services
             {
                 TransactionDateUtc = new DateTime(p.PurchaseTime),
                 Id = p.OrderId,
-                ProductId = p.Skus.FirstOrDefault(),
+                ProductId = p.Products.FirstOrDefault(),
                 Acknowledged = p.IsAcknowledged,
                 AutoRenewing = p.IsAutoRenewing,
                 State = p.GetPurchaseState(),
@@ -852,7 +873,7 @@ namespace Companova.Maui.Common.Android.Services
         /// currency. For example, if price is "€7.99", price_amount_micros is "7990000". 
         /// This value represents the localized, rounded price for a particular currency.
         /// </summary>
-        public Int64 MicrosPrice { get; set; }
+        public Int64? MicrosPrice { get; set; }
 
         /// <summary>
         /// Gets or sets the localized introductory price.

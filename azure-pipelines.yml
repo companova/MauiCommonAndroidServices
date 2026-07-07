@@ -24,9 +24,15 @@ steps:
 # https://github.com/actions/runner-images/issues/8828
 - task: JavaToolInstaller@0
   inputs:
-    versionSpec: '11'
+    versionSpec: '21'
     jdkArchitectureOption: 'x64'
     jdkSourceOption: 'PreInstalled'
+
+# Install the Android Workload (Fixes NETSDK1147). This makes Android SDK available for the build.
+- task: CmdLine@2
+  displayName: 'Install MAUI Android Workload'
+  inputs:
+    script: 'dotnet workload install android'
 
 - task: NuGetCommand@2
   displayName: 'Restore Nuget Packages'

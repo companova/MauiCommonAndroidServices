@@ -3,8 +3,8 @@
   <PropertyGroup>
     <!--Work around so the conditions work below-->
     <TargetFrameworks></TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net8.0-android</TargetFrameworks>
-    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net8.0-android</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net10.0-android</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net10.0-android</TargetFrameworks>
     <!--Feel free to add as many targets as you need below
     netstandard1.0;netstandard2.0;MonoAndroid90;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
     For UWP update the version number with a version number you have installed.
@@ -14,10 +14,10 @@
     <PackageId>Companova.Maui.Common.Android.Services</PackageId>
     
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
-    <Version>0.0.1-preview</Version>
-    <PackageVersion>0.0.1-preview</PackageVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.1.0.0</AssemblyFileVersion>
+    <Version>1.0.0</Version>
+    <PackageVersion>1.0.0</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -34,7 +34,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/companova/MauiCommonAndroidServices/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/companova/MauiCommonAndroidServices/</RepositoryUrl>
-    <PackageReleaseNotes>Upgraded to Android SDK 13, Android Billing Library to 6.2.1, Firebase Analytics to 122.1.2.1 and GooglePlayServices Ads to 123.6.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgraded to Android SDK 36, Android Billing Library to 8.3.0.2, Firebase Analytics to 123.2.0 and GooglePlayServices Ads to 125.2.0</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <!--<PackageIconUrl>ICON URL</PackageIconUrl>-->
     <PackageTags>android, maui, plugin, billing client, in-app purchase, firebase, analytics, admob, interstitial ads, Companova, Common.Android.Services</PackageTags>
@@ -44,16 +44,16 @@
     <Description>
       Maui implementation for Common Android Services.
 
-      - Interstitial Ads version 123.6.0
-      - Firebase Analytics version 122.1.2.1
-      - In-App-Purchases supporting Billing library 6.2.1
+      - Interstitial Ads version 125.2.0
+      - Firebase Analytics version 123.2.0
+      - In-App-Purchases supporting Billing library 8.3.0.2
     </Description>
 
     
     <Owners>Dima Maltsev</Owners>
     <Authors>Dima Maltsev</Authors>
     <Company>CompaNova LLC</Company>
-    <Copyright>Copyright 2025</Copyright>
+    <Copyright>Copyright 2026</Copyright>
 
     <!--When built in 2019 will remove extra references on pack-->
     <DisableExtraReferences>true</DisableExtraReferences>
@@ -78,9 +78,10 @@
 
   <ItemGroup Condition=" $(TargetFramework.Contains('-android')) ">
     <Compile Include="**\*.android.cs" />
-    <PackageReference Include="Xamarin.Firebase.Analytics" Version="122.1.2.1" />
-    <PackageReference Include="Xamarin.Android.Google.BillingClient" Version="6.2.1" />
-    <PackageReference Include="Xamarin.GooglePlayServices.Ads" Version="123.6.0" /> 
+    <PackageReference Include="Xamarin.Firebase.Analytics" Version="123.2.0" />
+    <PackageReference Include="Xamarin.Android.Google.BillingClient" Version="8.3.0.2" />
+    <PackageReference Include="Xamarin.GooglePlayServices.Ads" Version="125.2.0" />
+    <PackageReference Include="Xamarin.AndroidX.DataStore.Preferences" Version="1.2.1" />
   </ItemGroup>
 
   <ItemGroup>

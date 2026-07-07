@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
-
-using Android.Gms.Ads;
-using Android.Gms.Ads.Interstitial;
+using System.Diagnostics.CodeAnalysis;
 
 using Android.App;
 using Android.Runtime;
+
+using Google.Android.Gms.Ads;
+using Google.Android.Gms.Ads.Interstitial;
 
 using Companova.Maui.Common.Android.Helpers;
 
@@ -15,7 +16,7 @@ namespace Companova.Maui.Common.Android.Services
     /// <summary>
     /// See: https://docs.microsoft.com/en-us/answers/questions/540463/xamarinandroid-admob-v20-intertitialads-problem.html
     /// </summary>
-    // [Preserve(AllMembers = true)]
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
     public abstract class InterstitialCallback : InterstitialAdLoadCallback
     {
         /// <summary>
@@ -44,9 +45,10 @@ namespace Companova.Maui.Common.Android.Services
     /// <summary>
     /// Interstitial Ad Service implementation on Android
     /// </summary>
-    // [Preserve(AllMembers = true)]
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
     public class InterstitialService : InterstitialCallback, IInterstitialService
     {
+        private const string InterstitialAdLoaded = "ad_int_loaded";
         private const string InterstitialAdLoadError = "ad_int_load_error";
         internal const string InterstitialAdShowError = "ad_int_show_error";
 
@@ -203,6 +205,8 @@ namespace Companova.Maui.Common.Android.Services
 
             _adInterstitial = adInterstitial;
             _adInterstitial.FullScreenContentCallback = _adCallback;
+
+            _analyticsService?.LogEvent(InterstitialAdLoaded);
         }
 
         /// <summary>
@@ -249,7 +253,7 @@ namespace Companova.Maui.Common.Android.Services
         }
     }
 
-    // [Preserve(AllMembers = true)]
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
     internal class InterstitialAdServiceFullScreenContentCallback : FullScreenContentCallback
     {
         public TaskCompletionSource<object> AdClosed;
