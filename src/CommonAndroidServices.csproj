@@ -14,10 +14,10 @@
     <PackageId>Companova.Maui.Common.Android.Services</PackageId>
     
     <Product>$(AssemblyName) ($(TargetFramework))</Product>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
-    <AssemblyFileVersion>1.0.1.0</AssemblyFileVersion>
-    <Version>0.0.2-preview</Version>
-    <PackageVersion>0.0.2-preview</PackageVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.1.0.0</AssemblyFileVersion>
+    <Version>1.0.0</Version>
+    <PackageVersion>1.0.0</PackageVersion>
     <PackOnBuild>true</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
@@ -34,7 +34,7 @@
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://github.com/companova/MauiCommonAndroidServices/</PackageProjectUrl>
     <RepositoryUrl>https://github.com/companova/MauiCommonAndroidServices/</RepositoryUrl>
-    <PackageReleaseNotes>Upgraded to Android SDK 13, Android Billing Library to 6.2.1, Firebase Analytics to 122.1.2.1 and GooglePlayServices Ads to 123.6.0</PackageReleaseNotes>
+    <PackageReleaseNotes>Upgraded to Android SDK 36, Android Billing Library to 8.3.0.2, Firebase Analytics to 123.2.0 and GooglePlayServices Ads to 125.2.0</PackageReleaseNotes>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <!--<PackageIconUrl>ICON URL</PackageIconUrl>-->
     <PackageTags>android, maui, plugin, billing client, in-app purchase, firebase, analytics, admob, interstitial ads, Companova, Common.Android.Services</PackageTags>
@@ -44,16 +44,16 @@
     <Description>
       Maui implementation for Common Android Services.
 
-      - Interstitial Ads version 123.6.0
-      - Firebase Analytics version 122.1.2.1
-      - In-App-Purchases supporting Billing library 6.2.1
+      - Interstitial Ads version 125.2.0
+      - Firebase Analytics version 123.2.0
+      - In-App-Purchases supporting Billing library 8.3.0.2
     </Description>
 
     
     <Owners>Dima Maltsev</Owners>
     <Authors>Dima Maltsev</Authors>
     <Company>CompaNova LLC</Company>
-    <Copyright>Copyright 2025</Copyright>
+    <Copyright>Copyright 2026</Copyright>
 
     <!--When built in 2019 will remove extra references on pack-->
     <DisableExtraReferences>true</DisableExtraReferences>

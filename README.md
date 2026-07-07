@@ -1,9 +1,8 @@
 # MauiCommonAndroidServices
 Maui implementation of Common Android Services:
-- Interstitial Ads version 122.3.0
-- Firebase Analytics version 121.3.0.4
-- In-App-Purchases supporting Billing library 5.2.0
-
+- Interstitial Ads version 125.2.0
+- Firebase Analytics version 123.2.0
+- In-App-Purchases supporting Billing library 8.3.0.2
 ### Build Status:
 
 master | dev
